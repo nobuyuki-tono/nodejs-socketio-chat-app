@@ -19,3 +19,21 @@ body {
   background: var(--light-color);
   margin: 20px;
 }
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 5px 15px;
+  background: var(--dark-color-a);
+  border: 0;
+  font-size: 17px;
+}
+
+/* Join page */
