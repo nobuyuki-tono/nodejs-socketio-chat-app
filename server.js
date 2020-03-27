@@ -17,22 +17,24 @@ const botName = "chatCord Bot";
 io.on("connection", socket => {
   //console.log("New WS Connection...");
 
-  socket.emit("message", formatMessage(botName, "Welcome to ChatCord"));
+  socket.on("joinRoom", ({ username, room }) => {
+    socket.emit("message", formatMessage(botName, "Welcome to ChatCord"));
 
-  // Broadcast when a user connects
-  socket.broadcast.emit(
-    "message",
-    formatMessage(botName, "A user has joind the chat")
-  );
-
-  // Runs when client disconnects
-  socket.on("disconnect", () => {
-    io.emit("message", formatMessage(botName, "A user has left chat room"));
+    // Broadcast when a user connects
+    socket.broadcast.emit(
+      "message",
+      formatMessage(botName, "A user has joind the chat")
+    );
   });
 
   // Listetn for chatMessage
   socket.on("chatMessage", msg => {
     io.emit("message", formatMessage("USER", msg));
+  });
+
+  // Runs when client disconnects
+  socket.on("disconnect", () => {
+    io.emit("message", formatMessage(botName, "A user has left chat room"));
   });
 });
 
